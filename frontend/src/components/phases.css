@@ -1,0 +1,59 @@
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.phases {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.phase {
+    flex: 1;
+    height: 150px; /* Fixed height */
+    background-color: #f0f0f0;
+    padding: 20px; /* Decreased padding */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center text */
+    font-size: 20px; /* Increased font size */
+    border: 1px solid black; /* Black border */
+    position: relative; /* Position relative for absolute positioning of the close button */
+}
+.phase.selected {
+    background-color: #4caf50;
+    color: #fff;
+}
+.phase:hover {
+    background-color: #e0e0e0;
+}
+.delivery {
+    height: 100px; /* Reduced height */
+    padding: 10px; /* Reduced padding */
+    position: relative; /* Position relative for absolute positioning of the close button */
+}
+.close-button {
+    margin-top: 0px; /* Add margin to separate it from the delivery phase */
+    display: block; /* Make it a block element to occupy full width */
+    width: 100px; /* Make it occupy full width */
+
+    cursor: pointer;
+    background-color: #2196F3; /* Blue color */
+    border: none;
+    padding: 10px 20px; /* Larger padding */
+    border-radius: 8px; /* Larger border radius */
+    color: #fff; /* White text color */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+h2 {
+    text-align: center;
+    font-style: bold;
+    color: #00008b;
+    font-size: 35px;
+}
