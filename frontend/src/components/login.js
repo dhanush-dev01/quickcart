@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
   const [customer_id, setCustomerId] = useState('');
   const [customer_name, setCustomerName] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,6 +16,7 @@ const Login = () => {
       console.log('Login successful:', response.data);
       setLoggedIn(true);
       localStorage.setItem('isLoggedIn', 'true');
+      setIsLoggedIn(true);
 
       // Redirect to home page after successful login
       navigate('/home');
@@ -24,10 +25,10 @@ const Login = () => {
     }
   };
 
-  if (loggedIn) {
-    // Redirect to home page if already logged in
-    return null; // or any loading indicator if needed
-  }
+  // if (loggedIn) {
+  //   // Redirect to home page if already logged in
+  //   return null; // or any loading indicator if needed
+  // }
 
   return (
     <div>
