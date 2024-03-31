@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
+import { useNavigate } from 'react-router-dom'; 
 import './login.css';
 import axios from 'axios';
 
@@ -12,9 +12,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', { customer_id, customer_name });
+      const response = await axios.post('http://localhost:5001/login', { customer_id, customer_name });
       console.log('Login successful:', response.data);
       setLoggedIn(true);
+      localStorage.setItem('isLoggedIn', 'true');
+
       // Redirect to home page after successful login
       navigate('/home');
     } catch (error) {

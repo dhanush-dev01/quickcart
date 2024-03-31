@@ -3,7 +3,7 @@ const sql = require('mssql');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 // Enable CORS middleware
 app.use(cors());
@@ -11,7 +11,11 @@ app.use(express.json()); // Parse JSON bodies
 
 // Connection configuration
 const config = {
-// <------------------connection string ---------------->
+  user: 'Akshay',
+  password: 'Aksquickcart98@',
+  server: 'quickcart1.database.windows.net',
+  database: 'quickcartDB',
+  
   options: {
     encrypt: true // For Azure SQL Server, set encrypt to true
   }

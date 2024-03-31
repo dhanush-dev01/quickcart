@@ -12,7 +12,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/adminlogin', { admin_id, admin_name });
+      const response = await axios.post('http://localhost:5001/adminlogin', { admin_id, admin_name });
       console.log('Login successful:', response.data);
       setLoggedIn(true);
       navigate('/home');

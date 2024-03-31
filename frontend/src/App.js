@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
+import { useNavigate } from 'react-router-dom';
 import Products from "./components/product";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from "./components/login";
@@ -12,13 +13,24 @@ import Adminconsole from './components/adminconsole';
 import AdminLogin from './components/adminlogin';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const navigate = useNavigate();
+    // const isAuthenticated = false;
+
+    useEffect(() => {
+      if(localStorage.getItem('isLoggedIn') === 'true'){
+        setIsLoggedIn(true)
+      }
+    }, [isLoggedIn]); // Add isLoggedIn as a dependency
+    
+
   return (
     <Router>
         <Routes>
           <Route path="/customerlogin" element={<Login/>} />
           <Route path="/adminlogin" element={<AdminLogin/>} />
-          <Route path="/adminconsole" element={<Adminconsole/>} />
-          <Route path="/home" element={<Products/>} />
+          <Route path="/adminconsole" element={isLoggedIn ? <Adminconsole/> : <Navigate to="/" />} />
+          <Route path="/home" element={isLoggedIn ? <Products/> : <Navigate to="/" />} />
           <Route path="/" element={<RoleSelection/>} />
           </Routes>
     </Router>

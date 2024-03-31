@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import './navbar.css'
+import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
+
 const Navbar = () => {
+  const navigate = useNavigate(); 
+
   useEffect(() => {
     const hamburger = document.querySelector(".hamburger");
     const navLinks = document.querySelector(".nav-links");
@@ -24,6 +28,11 @@ const Navbar = () => {
       hamburger.removeEventListener("click", handleClick);
     };
   }, []); // Empty dependency array means it will run only once on component mount
+
+   const handleLogout = () => {
+    localStorage.setItem('isLoggedIn', 'false');
+    navigate('/');
+  };
 
   return (
     <div>
@@ -53,8 +62,8 @@ const Navbar = () => {
             <a href="#">Contact Us</a>
           </li>
           <li>
-            <a className="login-button" href="/login">
-              Login
+            <a className="login-button" onClick={handleLogout}>
+              Logout
             </a>
           </li>
         </ul>
