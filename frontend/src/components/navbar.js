@@ -32,13 +32,15 @@ const Navbar = () => {
    const handleLogout = () => {
     localStorage.setItem('isLoggedIn', 'false');
     navigate('/');
+    window.location.reload();
+
   };
 
   return (
     <div>
       <nav>
         <div class="logo">
-          <img src="https://w7.pngwing.com/pngs/54/626/png-transparent-home-appliance-home-appliance-washing-machine-rice-cooker-refrigerator-home-appliances-kitchen-furniture-service.png" alt="Logo Image" />
+          <img src="./Product_images/company_logo.jpg" alt="Logo Image" />
         </div>
         <div class="hamburger">
           <div class="line1"></div>
