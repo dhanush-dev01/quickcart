@@ -37,18 +37,21 @@ const userid = "cus01";
       <div className="cardmain">
         <div className="card">
           <img
-            src="https://image.makewebcdn.com/makeweb/m_1920x0/WFGOSRooO/adsproduct/418.jpg"
+            src="/Product_Images/DC_Earth_Fault_Locator.jpg"
             alt=""
           />
           <div className="details">
-          <button onClick={assignProduct}>Assign</button>
-          <button onClick={unAssignProduct}>Remove</button>
+     
+            <a href="/phases">buy now</a>
+       
+          {/* <button onClick={assignProduct}>Assign</button>
+          <button onClick={unAssignProduct}>Remove</button> */}
 
           </div>
         </div>
         <div className="card">
           <img
-            src="https://image.makewebcdn.com/makeweb/m_1920x0/WFGOSRooO/adsproduct/418.jpg"
+            src="/Product_Images/DC_Earth_Resistance_Tester.jpg"
             alt=""
           />
           <div className="details">
@@ -57,7 +60,7 @@ const userid = "cus01";
         </div>
         <div className="card">
           <img
-            src="https://image.makewebcdn.com/makeweb/m_1920x0/WFGOSRooO/adsproduct/418.jpg"
+            src="/Product_Images/Insulation_Tester.jpg"
             alt=""
           />
           <div className="details">
@@ -66,7 +69,7 @@ const userid = "cus01";
         </div>
         <div className="card">
           <img
-            src="https://image.makewebcdn.com/makeweb/m_1920x0/WFGOSRooO/adsproduct/418.jpg"
+            src="/Product_Images/Offline_Fault_Locator.jpg"
             alt=""
           />
           <div className="details">
