@@ -15,7 +15,7 @@ const Home = () => {
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Status</a>
           </div>
         </div>
         <div className="card">
@@ -24,7 +24,7 @@ const Home = () => {
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Status</a>
           </div>
         </div>
         <div className="card">
@@ -33,7 +33,7 @@ const Home = () => {
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Status</a>
           </div>
         </div>
         <div className="card">
@@ -42,7 +42,7 @@ const Home = () => {
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Status</a>
           </div>
         </div>
       </div>

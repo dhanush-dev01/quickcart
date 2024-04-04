@@ -16,6 +16,10 @@
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Insulation Tester', './Product_images/Insulation_Tester.jpg.jpg');
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Offline Fault Locator', './Product_images/Offline_Fault_Locator.jpg');
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Preziohm TFR', './Product_images/Preziohm_TFR.png');
-SELECT * from auth_customer
--- DELETE FROM products_info;
+SELECT * from customer_products
+-- DELETE FROM customer_products;
+-- CREATE TABLE customer_products (
+--     product_id INT,
+--     customer_id VARCHAR(255) NOT NULL
+-- );
 

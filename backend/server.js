@@ -126,6 +126,25 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+app.get('/api/listuserproducts', async (req, res) => {
+  try {
+    // Connect to the database
+    await sql.connect(config);
+
+    // Query to retrieve customer info from all rows
+    const result = await sql.query('SELECT customer_id, customer_name FROM auth_customer');
+
+    // Close the database connection
+    await sql.close();
+
+    // Send customer info as JSON response
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error retrieving customer info:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.post('/api/users/create', async (req, res) => {
   const { customer_id, customer_name } = req.body;
 
