@@ -42,7 +42,7 @@ const userid = "cus01";
           />
           <div className="details">
      
-            <a href="/phases">buy now</a>
+            <a href="/phases">Assign</a>
        
           {/* <button onClick={assignProduct}>Assign</button>
           <button onClick={unAssignProduct}>Remove</button> */}
@@ -55,7 +55,7 @@ const userid = "cus01";
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Assign</a>
           </div>
         </div>
         <div className="card">
@@ -64,7 +64,7 @@ const userid = "cus01";
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Assign</a>
           </div>
         </div>
         <div className="card">
@@ -73,7 +73,7 @@ const userid = "cus01";
             alt=""
           />
           <div className="details">
-            <a href="/phases">buy now</a>
+            <a href="/phases">Assign</a>
           </div>
         </div>
       </div>
