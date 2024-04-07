@@ -1,6 +1,6 @@
--- SELECT TABLE_NAME
--- FROM INFORMATION_SCHEMA.TABLES
--- WHERE TABLE_TYPE='BASE TABLE'
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE='BASE TABLE'
 
 
 
@@ -16,10 +16,21 @@
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Insulation Tester', './Product_images/Insulation_Tester.jpg.jpg');
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Offline Fault Locator', './Product_images/Offline_Fault_Locator.jpg');
 -- INSERT INTO products_info (product_name, product_image_path) VALUES ('Preziohm TFR', './Product_images/Preziohm_TFR.png');
-SELECT * from customer_products
+
 -- DELETE FROM customer_products;
 -- CREATE TABLE customer_products (
 --     product_id INT,
 --     customer_id VARCHAR(255) NOT NULL
 -- );
+-- UPDATE products_info
+-- SET product_image_path = '/Product_Images/Insulation_Tester.jpg'
+-- where product_id=5
+-- UPDATE products_info
+-- SET product_image_path = '/Product_Images/Offline_Fault_Locator.jpg'
+-- where product_id=6
+-- UPDATE products_info
+-- SET product_image_path = '/Product_Images/Preziohm_TFR.png'
+-- where product_id=7
+-- SELECT * from products_info
+
 
