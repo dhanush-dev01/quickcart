@@ -16,6 +16,7 @@ const Login = ({setIsLoggedIn}) => {
       console.log('Login successful:', response.data);
       setLoggedIn(true);
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('customer_id',customer_id)
       setIsLoggedIn(true);
 
       // Redirect to home page after successful login

@@ -10,7 +10,8 @@ const Home = () => {
       try {
         const currentUser = localStorage.getItem('customer_id');
         console.log(currentUser)
-        const response = await axios.get('http://localhost:5001/api/listuserproducts', { currentUser });
+        const response = await axios.post('http://localhost:5001/api/listuserproducts', { customer_id: currentUser });
+        console.log(response.data);
         setUserProducts(response.data);
       } catch (error) {
         console.error('Error fetching user products:', error);

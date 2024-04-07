@@ -1,6 +1,6 @@
-SELECT TABLE_NAME
-FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_TYPE='BASE TABLE'
+-- SELECT TABLE_NAME
+-- FROM INFORMATION_SCHEMA.TABLES
+-- WHERE TABLE_TYPE='BASE TABLE'
 
 
 
@@ -31,6 +31,6 @@ WHERE TABLE_TYPE='BASE TABLE'
 -- UPDATE products_info
 -- SET product_image_path = '/Product_Images/Preziohm_TFR.png'
 -- where product_id=7
--- SELECT * from products_info
+SELECT * from customer_products
 
 
