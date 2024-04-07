@@ -1,11 +1,21 @@
 .adbtn{
     width: 100%;
+    margin-left: -10px;
     padding: 10px 10px 10px 10px;
     text-transform: capitalize;
     background-color: rgb(167, 173, 224);
     border:1px solid black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+}
+.delete-btn{
+  width: 100%;
+  color: aliceblue;
+  padding: 10px 10px 10px 10px;
+  text-transform: capitalize;
+  background-color: rgb(207, 24, 24);
+  border:1px solid black;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .details{
     display: flex;

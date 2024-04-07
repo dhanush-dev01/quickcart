@@ -57,6 +57,35 @@ app.post('/login', async (req, res) => {
     await sql.close(); // Close SQL connection
   }
 });
+// Route to handle user deletion
+app.delete('/api/delete/:customerId', async (req, res) => {
+  const customerId = req.params.customerId;
+
+  try {
+    // Connect to the database
+    await connectToDatabase();
+
+    // Execute the delete query to remove the user with the specified ID
+    const result = await sql.query`
+      DELETE FROM auth_customer WHERE customer_id = ${customerId}
+    `;
+
+    // Close the database connection
+    await sql.close();
+
+    // Check if any rows were affected by the delete operation
+    if (result.rowsAffected > 0) {
+      res.status(200).json({ message: `User with ID ${customerId} deleted successfully` });
+    } else {
+      res.status(404).json({ error: `User with ID ${customerId} not found` });
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 app.post('/adminlogin', async (req, res) => {
   const { admin_id, admin_name } = req.body;
 
@@ -69,7 +98,7 @@ app.post('/adminlogin', async (req, res) => {
     `;
 
     if (result.recordset.length === 0) {
-      throw new Error('Authentication failed. Invalid customer ID or customer name.');
+      throw new Error('Authentication failed. Invalid admin ID or admin name.');
     }
 
     // Authentication successful
@@ -168,6 +197,54 @@ app.post('/api/users/create', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// Assuming you have already imported necessary modules and configured the database connection
+
+// GET endpoint to fetch all product details
+app.get('/api/products', async (req, res) => {
+  try {
+    // Connect to the database
+    await sql.connect(config);
+
+    // Query to retrieve product info from all rows
+    const result = await sql.query('SELECT product_id, product_name, product_image_path FROM products_info');
+
+    // Close the database connection
+    await sql.close();
+
+    // Send product info as JSON response
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error retrieving product info:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+app.post('/api/products/assign', async (req, res) => {
+  const { productId, customerId } = req.body; // Extract productId and customerId from request body
+
+  try {
+    // Perform database operations to insert the assigned product into the customer_products table
+    // Make sure you're properly connecting to the database and executing the SQL query
+
+    // Example: Assuming you're using a SQL database and the 'sql' library
+    await connectToDatabase();
+
+    // Insert the assigned product into the customer_products table
+    const result = await sql.query`
+      INSERT INTO customer_products (customer_id, product_id) 
+      VALUES (${customerId}, ${productId})
+    `;
+
+    res.status(200).json({ message: 'Product assigned successfully' });
+  } catch (error) {
+    console.error('Error assigning product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await sql.close(); // Close the SQL connection
+  }
+});
+
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
