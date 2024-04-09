@@ -31,6 +31,24 @@
 -- UPDATE products_info
 -- SET product_image_path = '/Product_Images/Preziohm_TFR.png'
 -- where product_id=7
-SELECT * from products_info
+-- SELECT * from customer_products
+
+CREATE TABLE tracking (
+    tracking_id INT IDENTITY(1,1) PRIMARY KEY,
+    product_id INT,
+    customer_id INT,
+    reception BOOLEAN DEFAULT FALSE,
+    evaluation BOOLEAN DEFAULT FALSE,
+    quotation BOOLEAN DEFAULT FALSE,
+    awaiting_work_order BOOLEAN DEFAULT FALSE,
+    service_in_progress BOOLEAN DEFAULT FALSE,
+    calibration BOOLEAN DEFAULT FALSE,
+    packing BOOLEAN DEFAULT FALSE,
+    dispatched BOOLEAN DEFAULT FALSE,
+    delivery BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (product_id) REFERENCES customer_products(product_id),
+    FOREIGN KEY (customer_id) REFERENCES customer_products(customer_id)
+);
+
 
 

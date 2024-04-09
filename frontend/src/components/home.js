@@ -34,7 +34,7 @@ const Home = () => {
             <img src={product.product_image_path} alt={product.products_name} />
 
             <div className="details">
-              <a href="/phases">buy now</a>
+              <a href="/phases">view status</a>
             </div>
           </div>
         ))}
