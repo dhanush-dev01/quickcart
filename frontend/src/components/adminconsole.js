@@ -8,6 +8,8 @@ const Adminconsole = () => {
   const [users, setUsers] = useState([]); // State to hold user data
   const [newUser, setNewUser] = useState({ customer_id: '', customer_name: '' }); // State to hold new user data
   const [modalOpen, setModalOpen] = useState(false); // State to manage modal open/close
+  const [triggerApiCall, setTriggerApiCall] = useState(false);
+
 
   useEffect(() => {
     // Fetch user data from the backend API
@@ -18,7 +20,7 @@ const Adminconsole = () => {
       .catch(error => {
         console.error('Error fetching user data:', error);
       });
-  }, []); // Run only once on component mount
+  }, [triggerApiCall]); // Run only once on component mount
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +44,8 @@ const Adminconsole = () => {
       .catch(error => {
         console.error('Error creating user:', error);
       });
+      setTriggerApiCall(triggerApiCall ? false : true);
+
   };
 
   // Function to handle deleting a user
@@ -59,6 +63,8 @@ const Adminconsole = () => {
           console.error('Error deleting user:', error);
         });
     }
+    // setTriggerApiCall(triggerApiCall ? false : true);
+
   };
 
   return (

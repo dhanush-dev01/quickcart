@@ -1,9 +1,22 @@
--- SELECT TABLE_NAME
--- FROM INFORMATION_SCHEMA.TABLES
--- WHERE TABLE_TYPE='BASE TABLE'
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE='BASE TABLE'
 
 
+--    SELECT pi.product_id
+-- FROM products_info pi
+-- LEFT JOIN customer_products cp ON pi.product_id = cp.product_id
+-- WHERE cp.customer_id = 'cus09';
 
+-- SELECT * FROM customer_products
+-- SELECT * FROM products_info
+-- SELECT product_id, product_name, product_image_path
+-- FROM products_info
+-- WHERE product_id NOT IN (
+--     SELECT product_id
+--     FROM customer_products
+--     WHERE customer_id = 'cus02'
+-- );
 
 
 -- CREATE TABLE products_info (
