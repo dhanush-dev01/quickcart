@@ -271,6 +271,31 @@ WHERE c.customer_id = ${customer_id}
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+app.post('/api/products/unassign', async (req, res) => {
+  const { productId } = req.body; // Extract productId from request body
+
+  try {
+    // Perform database operations to remove the product from the customer_products table
+    // Make sure you're properly connecting to the database and executing the SQL query
+
+    // Example: Assuming you're using a SQL database and the 'sql' library
+    await connectToDatabase();
+
+    // Remove the product from the customer_products table based on productId
+    const result = await sql.query`
+      DELETE FROM customer_products 
+      WHERE product_id = ${productId}
+    `;
+
+    res.status(200).json({ message: 'Product unassigned successfully' });
+  } catch (error) {
+    console.error('Error unassigning product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await sql.close(); // Close the SQL connection
+  }
+});
+
 
 
 // Start server

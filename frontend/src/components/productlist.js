@@ -5,6 +5,7 @@ import axios from "axios";
 const Productlist = () => {
   const { customerId } = useParams(); // Extract customerId from URL
   const [products, setProducts] = useState([]);
+  const [userProducts, setUserProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,6 +20,35 @@ const Productlist = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const fetchUserProducts = async () => {
+      try {
+        const currentUser = localStorage.getItem('customer_id');
+        console.log(currentUser);
+        const response = await axios.post('http://localhost:5001/api/listuserproducts', { customer_id: currentUser });
+        console.log("User products:", response.data); 
+        setUserProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching user products:', error);
+      }
+    };
+
+    fetchUserProducts();
+  }, []);
+
+  const unassignProduct = async (productId) => {
+    console.log("Assigning product with ID:", productId); // Debugging statement
+    try {
+      const response = await axios.post("http://localhost:5001/api/products/unassign", { productId });
+      console.log("Product assigned successfully:", response.data);
+      window.alert(`Product ${productId} assigned to customer ${customerId} successfully!`);
+      // Optionally, you can refresh the product list after assignment
+      // fetchProducts();
+    } catch (error) {
+      console.error("Error assigning product:", error);
+    }
+  };
+
   const assignProduct = async (productId) => {
     console.log("Assigning product with ID:", productId); // Debugging statement
     try {
@@ -31,11 +61,12 @@ const Productlist = () => {
       console.error("Error assigning product:", error);
     }
   };
-  
+
+
 
   return (
     <div>
-      <h1 id="products">Available Products</h1>
+      <h1>Available Products</h1>
       <div className="cardmain">
         {products.map((product) => (
           <div className="card" key={product.product_id}>
@@ -43,8 +74,19 @@ const Productlist = () => {
             <div className="details">
               <span>{product.product_name}</span>
               <button onClick={() => assignProduct(product.product_id)}>Assign</button>
-              
               {/* Add any additional product details here */}
+            </div>
+          </div>
+        ))}
+      </div>
+      <h1>Assigned Products</h1>
+      <div className="cardmain">
+        {userProducts.map((product) => (
+          <div className="card" key={product.product_id}>
+            <img src={product.product_image_path} alt={product.products_name} />
+            <div className="details">
+              <a href="/phases">status</a>
+              <button onClick={() => unassignProduct(product.product_id)}>Unassign</button>
             </div>
           </div>
         ))}
