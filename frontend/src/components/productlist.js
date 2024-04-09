@@ -7,6 +7,7 @@ const Productlist = () => {
   const [products, setProducts] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
 
+  console.log(customerId)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -23,11 +24,11 @@ const Productlist = () => {
   useEffect(() => {
     const fetchUserProducts = async () => {
       try {
-        const currentUser = localStorage.getItem('customer_id');
-        console.log(currentUser);
-        const response = await axios.post('http://localhost:5001/api/listuserproducts', { customer_id: currentUser });
+        console.log(customerId);
+        const response = await axios.post('http://localhost:5001/api/listuserproducts', { customer_id: customerId });
         console.log("User products:", response.data); 
         setUserProducts(response.data);
+        console.log(setUserProducts)
       } catch (error) {
         console.error('Error fetching user products:', error);
       }
@@ -80,17 +81,35 @@ const Productlist = () => {
         ))}
       </div>
       <h1>Assigned Products</h1>
-      <div className="cardmain">
+      {/* <div className="cardmain">
         {userProducts.map((product) => (
           <div className="card" key={product.product_id}>
             <img src={product.product_image_path} alt={product.products_name} />
+            
             <div className="details">
               <a href="/phases">status</a>
               <button onClick={() => unassignProduct(product.product_id)}>Unassign</button>
             </div>
           </div>
         ))}
+      </div> */}
+
+<div className="cardmain">
+  {userProducts.map((p) => {
+// Debugging statement
+    return (
+      <div className="card" key={p.product_id}>
+        <img src={p.product_image_path} alt={p.products_name} />
+        <div className="details">
+          <a href="/phases">status</a>
+          <button onClick={() => unassignProduct(p.product_id)}>Unassign</button>
+        </div>
       </div>
+    );
+  })}
+</div>
+
+
     </div>
   );
 };

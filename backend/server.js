@@ -255,7 +255,7 @@ app.post('/api/listuserproducts', async (req, res) => {
 
     // Query to retrieve customer info from all rows
     const result = await sql.query`
-    SELECT p.product_image_path
+    SELECT p.product_image_path,p.product_id,p.product_name
 FROM customer_products AS c
 JOIN products_info AS p ON c.product_id = p.product_id
 WHERE c.customer_id = ${customer_id}
@@ -279,7 +279,7 @@ app.post('/api/products/unassign', async (req, res) => {
     // Make sure you're properly connecting to the database and executing the SQL query
 
     // Example: Assuming you're using a SQL database and the 'sql' library
-    await connectToDatabase();
+    await sql.connect(config);
 
     // Remove the product from the customer_products table based on productId
     const result = await sql.query`

@@ -31,6 +31,6 @@
 -- UPDATE products_info
 -- SET product_image_path = '/Product_Images/Preziohm_TFR.png'
 -- where product_id=7
-SELECT * from customer_products
+SELECT * from products_info
 
 
