@@ -335,6 +335,37 @@ app.post('/api/products/unassign', async (req, res) => {
 });
 
 
+//status api
+
+app.post('/api/setstatus', async (req, res) => {
+  const { customer_id, product_id,
+     reception, evaluation,
+      quotation, awaiting_work_order, 
+      service_in_progress, calibration,
+      packing, dispatched, delivery } = req.body; // Extract productId from request body
+
+  try {
+    const result = await sql.query`
+    UPDATE tracking
+    SET customer_id = ${customer_id}, product_id = ${product_id}, 
+    reception = ${reception}, evaluation= ${evaluation}, quotation = ${quotation},
+    awaiting_work_order = ${awaiting_work_order}, service_in_progress = ${service_in_progress},
+    calibration = ${calibration}, packing = ${packing}, dispatched = ${dispatched},
+    delivery = ${delivery}
+    WHERE condition;
+    
+    `;
+
+    res.status(200).json({ message: 'Product unassigned successfully' });
+  } catch (error) {
+    console.error('Error unassigning product:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
 
 // Start server
 app.listen(port, () => {
