@@ -1,6 +1,6 @@
-SELECT TABLE_NAME
-FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_TYPE='BASE TABLE'
+-- SELECT TABLE_NAME
+-- FROM INFORMATION_SCHEMA.TABLES
+-- WHERE TABLE_TYPE='BASE TABLE'
 
 
 --    SELECT pi.product_id
@@ -8,7 +8,7 @@ WHERE TABLE_TYPE='BASE TABLE'
 -- LEFT JOIN customer_products cp ON pi.product_id = cp.product_id
 -- WHERE cp.customer_id = 'cus09';
 
--- SELECT * FROM customer_products
+SELECT * FROM tracking
 -- SELECT * FROM products_info
 -- SELECT product_id, product_name, product_image_path
 -- FROM products_info
