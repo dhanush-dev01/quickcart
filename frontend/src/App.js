@@ -35,7 +35,7 @@ function App() {
           <Route path="/listcomponents/:customerId" element={<ProductsList />} />
           <Route path="/adminconsole" element={isLoggedIn ? <Adminconsole/> : <Navigate to="/" />} />
           <Route path="/home" element={isLoggedIn ? <Products/> : <Navigate to="/" />} />
-          <Route path="/phases" element={<Phases/>} />
+          <Route path="/phases/:customerId/:productId" element={<Phases/>} />
           <Route path="/inward" element={<InwardForm/>} />
           <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <RoleSelection/>} />
           </Routes>

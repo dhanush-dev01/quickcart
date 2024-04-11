@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import axios from "axios";
 
 const Productlist = () => {
@@ -93,7 +93,9 @@ const Productlist = () => {
       <div className="card" key={p.product_id}>
         <img src={p.product_image_path} alt={p.products_name} />
         <div className="details">
-          <a href="/phases">status</a>
+        <Link to={`/phases/${customerId}/${p.product_id}`}>
+  status
+</Link>
           <button onClick={() => unassignProduct(p.product_id)}>Unassign</button>
         </div>
       </div>
