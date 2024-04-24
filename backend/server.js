@@ -270,6 +270,8 @@ app.post('/api/products/assign', async (req, res) => {
       INSERT INTO customer_products (customer_id, product_id) 
       VALUES (${customerId}, ${productId})
     `;
+const tracking = await sql.query`INSERT INTO tracking (product_id, customer_id, reception, evaluation, quotation, awaiting_work_order, service_in_progress, calibration, packing, dispatched, delivery)
+VALUES (${productId}, ${customerId}, 0, 0, 0, 0, 0, 0, 0, 0, 0)`;
 
     res.status(200).json({ message: 'Product assigned successfully' });
   } catch (error) {
@@ -280,6 +282,7 @@ app.post('/api/products/assign', async (req, res) => {
   //   await sql.close(); // Close the SQL connection
   // }
 });
+
 
 app.post('/api/listuserproducts', async (req, res) => {
   const { customer_id } = req.body;
@@ -323,6 +326,15 @@ app.post('/api/products/unassign', async (req, res) => {
       DELETE FROM customer_products 
       WHERE product_id = ${productId}
     `;
+    const result2 = await sql.query`
+    DELETE FROM tracking
+    WHERE product_id = ${productId}
+  `;
+  const result3 = await sql.query`
+  DELETE FROM inwardform 
+  WHERE pro_id = ${productId}
+`;
+  
 
     res.status(200).json({ message: 'Product unassigned successfully' });
   } catch (error) {
@@ -342,31 +354,61 @@ app.post('/api/setstatus', async (req, res) => {
      reception, evaluation,
       quotation, awaiting_work_order, 
       service_in_progress, calibration,
-      packing, dispatched, delivery } = req.body; // Extract productId from request body
+      packing, dispatched, delivery } = req.body;
 
   try {
     const result = await sql.query`
     UPDATE tracking
-    SET customer_id = ${customer_id}, product_id = ${product_id}, 
+    SET 
     reception = ${reception}, evaluation= ${evaluation}, quotation = ${quotation},
     awaiting_work_order = ${awaiting_work_order}, service_in_progress = ${service_in_progress},
     calibration = ${calibration}, packing = ${packing}, dispatched = ${dispatched},
     delivery = ${delivery}
-    WHERE condition;
-    
+    WHERE product_id = ${product_id} and customer_id = ${customer_id} 
     `;
 
-    res.status(200).json({ message: 'Product unassigned successfully' });
+    res.status(200).json({ message: 'Product status updated successfully' });
   } catch (error) {
-    console.error('Error unassigning product:', error);
+    console.error('Error updating product status:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get('/api/getstatus/:customer_id/:product_id', async (req, res) => {
+  const { customer_id, product_id } = req.params;
+
+  try {
+    // Retrieve records from the tracking table for the specified customer_id and product_id
+    const result = await sql.query`
+      SELECT * FROM tracking
+      WHERE customer_id = ${customer_id} AND product_id = ${product_id}
+    `;
+
+    // Send the retrieved data as a response
+    res.status(200).json(result.recordset);
+  } catch (error) {
+    console.error('Error retrieving product status:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 
+app.delete('/api/deletestatus/:customer_id/:product_id', async (req, res) => {
+  const { customer_id, product_id } = req.params;
 
-
-
+  try {
+      // Perform deletion operation in the tracking table
+      await sql.query`
+          DELETE FROM tracking
+          WHERE customer_id = ${customer_id} AND product_id = ${product_id}
+      `;
+      
+      res.status(200).json({ message: 'Record deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting record:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

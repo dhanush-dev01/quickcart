@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams,Link } from "react-router-dom";
 import axios from "axios";
-
+import './productlist.css'
 const Productlist = () => {
   const { customerId } = useParams(); // Extract customerId from URL
   const [products, setProducts] = useState([]);
@@ -71,6 +71,7 @@ const Productlist = () => {
 
   return (
     <div>
+      <a className="btc" href="/adminconsole">back</a>
       <h1>Available Products</h1>
       <div className="cardmain">
         {products.map((product) => (

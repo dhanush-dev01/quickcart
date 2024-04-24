@@ -12,6 +12,8 @@ import RoleSelection from './components/loginhome';
 import Adminconsole from './components/adminconsole';
 import AdminLogin from './components/adminlogin';
 import ProductsList from './components/productlist';
+import Userphases from './components/userphase';
+import AdminNavbar from './components/adminnav';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,10 +35,13 @@ function App() {
           <Route path="/customerlogin" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/adminlogin" element={<AdminLogin setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/listcomponents/:customerId" element={<ProductsList />} />
-          <Route path="/adminconsole" element={isLoggedIn ? <Adminconsole/> : <Navigate to="/" />} />
+          <Route path="/adminconsole" element={isLoggedIn ? <Adminconsole/> : <Navigate to="/adminconsole" />} />
           <Route path="/home" element={isLoggedIn ? <Products/> : <Navigate to="/" />} />
           <Route path="/phases/:customerId/:productId" element={<Phases/>} />
-          <Route path="/inward" element={<InwardForm/>} />
+          <Route path="/userphases/:customerId/:productId" element={<Userphases/>} />
+          <Route path="/inward/:customerId/:productId" element={<InwardForm/>} />
+          <Route path="/qutationform/:customerId/:productId" element={<QuotationForm/>} />
+          <Route path="/outwardform/:customerId/:productId" element={<OutwardForm/>} />
           <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <RoleSelection/>} />
           </Routes>
     </Router>

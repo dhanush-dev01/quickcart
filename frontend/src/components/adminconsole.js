@@ -1,8 +1,8 @@
-import Navbar from './navbar';
 import React, { useState, useEffect } from 'react';
 import './adminconsole.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
+import AdminNavbar from './adminnav';
 
 const Adminconsole = () => {
   const [users, setUsers] = useState([]); // State to hold user data
@@ -69,7 +69,7 @@ const Adminconsole = () => {
 
   return (
     <div>
-      <Navbar />
+      <AdminNavbar />
       <h1 id="users">User Records</h1>
       <div className="cardmain">
         {users.map(user => (

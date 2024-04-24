@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import './navbar.css'
+import './adminnav.css'
 import { useNavigate } from 'react-router-dom'; // Import useHistory from react-router-dom
 
-const Navbar = () => {
+const AdminNavbar = () => {
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Navbar = () => {
         </div>
         <ul class="nav-links">
           <li>
-            <a href="/">Home</a>
+            <a href="/adminconsole">Home</a>
           </li>
           <li>
             <a href="#">Contact Us</a>
@@ -65,4 +65,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

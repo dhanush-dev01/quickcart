@@ -1,16 +1,57 @@
-// InwardForm.js
-
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './inwardform.css';
+import { useParams } from 'react-router-dom';
 
 const InwardForm = () => {
+    const { customerId, productId } = useParams(); 
     const [equipmentName, setEquipmentName] = useState('');
     const [modelNumbers, setModelNumbers] = useState([]);
     const [accessories, setAccessories] = useState([]);
+    const [formData, setFormData] = useState({
+        customername: '',
+        address: '',
+        contactnumber: '',
+        equipmentname: '', // Add equipmentname to formData
+        modelnumber: '', // Add modelnumber to formData
+        serialnumber: '',
+        kitsreceived: '',
+        accessories_received: '',
+        customer_email: ''
+    });
+
+    useEffect(() => {
+        fetchData();
+    }, []); 
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5002/api/form/getinwardForm/${customerId}/${productId}`);
+            const data = response.data;
+            console.log("data",response)
+            // Set default values in the form state
+            setFormData({
+                customername: data.customername,
+                address: data.address,
+                contactnumber: data.contactnumber,
+                equipmentname: data.equipmentname,
+                modelnumber: data.modelnumber,
+                serialnumber: data.serialnumber,
+                kitsreceived: data.kitsreceived,
+                accessories_received: data.accessories_received,
+                customer_email: data.customer_email
+            });
+
+            // Set equipment name to trigger model number population
+            setEquipmentName(data.equipmentname || '');
+        } catch (error) {
+            console.error('Error fetching form data:', error);
+        }
+    }
 
     useEffect(() => {
         populateModelNumbers();
-    }, []);
+    }, [equipmentName]); 
 
     const populateModelNumbers = () => {
         switch (equipmentName) {
@@ -45,22 +86,70 @@ const InwardForm = () => {
         setAccessories(updatedAccessories);
     }
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'equipmentname') {
+            setEquipmentName(value);
+            setFormData({
+                ...formData,
+                equipmentname: value
+            });
+        } else if (name === 'modelnumber') {
+            setFormData({
+                ...formData,
+                modelnumber: value
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Form Data:', formData);
+        try {
+            const response = await axios.post('http://localhost:5002/api/form/inwardForm', {
+                ...formData,
+                customer_id: customerId, // Include customer_id obtained from URL parameter
+                pro_id: productId // Include pro_id obtained from URL parameter
+            });
+            console.log(response.data);
+            // Reset form data after successful submission
+            setFormData({
+                customername: '',
+                address: '',
+                contactnumber: '',
+                equipmentname: '',
+                modelnumber: '',
+                serialnumber: '',
+                kitsreceived: '',
+                accessories_received: '',
+                customer_email: ''
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     return (
         <div>
             <h2>INWARD FORM</h2>
-            <form action="submit_form.php" method="post" id="inwardForm">
-                <label htmlFor="customer_name">Customer Name:</label>
-                <input type="text" id="customer_name" name="customer_name"/><br/>
+            <form onSubmit={handleSubmit} method="post" id="inwardForm">
+                <label htmlFor="customername">Customer Name:</label>
+                <input type="text" id="customername" name="customername" value={formData.customername} onChange={handleInputChange}/><br/>
 
                 <label htmlFor="address">Address:</label>
-                <textarea id="address" name="address"></textarea><br/>
+                <textarea id="address" name="address" value={formData.address} onChange={handleInputChange}></textarea><br/>
 
-                <label htmlFor="contact_number">Contact Number:</label>
-                <input type="text" id="contact_number" name="contact_number"/><br/>
+                <label htmlFor="contactnumber">Contact Number:</label>
+                <input type="text" id="contactnumber" name="contactnumber" value={formData.contactnumber} onChange={handleInputChange}/><br/>
 
                 <div className="custom-select">
-                    <label htmlFor="equipment_name">Equipment Name:</label>
-                    <select id="equipment_name" name="equipment_name" onChange={(e) => setEquipmentName(e.target.value)}>
+                    <label htmlFor="equipmentname">Equipment Name:</label>
+                    <select id="equipmentname" name="equipmentname" onChange={handleInputChange}>
                         <option value="">Select Equipment</option>
                         <option value="ET">DC EARTH RESISTANCE TESTER</option>
                         <option value="IT">INSULATION TESTER</option>
@@ -71,33 +160,25 @@ const InwardForm = () => {
                     <div className="select-arrow">&#9660;</div>
                 </div><br/>
 
-                <label htmlFor="model_number">Model Number:</label>
-                <select id="model_number" name="model_number">
+                <label htmlFor="modelnumber">Model Number:</label>
+                <select id="modelnumber" name="modelnumber" value={formData.modelnumber} onChange={handleInputChange}>
                     <option value="">Select Model Number</option>
                     {modelNumbers.map((model, index) => (
                         <option key={index} value={model}>{model}</option>
                     ))}
                 </select><br/>
 
-                <label htmlFor="serial_number">Serial Number:</label>
-                <input type="text" id="serial_number" name="serial_number"/><br/>
+                <label htmlFor="serialnumber">Serial Number:</label>
+                <input type="text" id="serialnumber" name="serialnumber" value={formData.serialnumber} onChange={handleInputChange}/><br/>
 
-                <label htmlFor="kits_received">Kits Received:</label>
-                <input type="text" id="kits_received" name="kits_received"/><br/>
+                <label htmlFor="kitsreceived">Kits Received:</label>
+                <input type="text" id="kitsreceived" name="kitsreceived" value={formData.kitsreceived} onChange={handleInputChange}/><br/>
 
                 <label htmlFor="accessories_received">Accessories Received:</label>
-                <div id="accessories_container">
-                    {accessories.map((accessory, index) => (
-                        <div key={index}>
-                            <input type="text" value={accessory.name} placeholder="Accessory Name" onChange={(e) => handleAccessoryChange(index, 'name', e.target.value)} required/>
-                            <input type="number" value={accessory.quantity} min="1" placeholder="Quantity" onChange={(e) => handleAccessoryChange(index, 'quantity', e.target.value)} required/>
-                        </div>
-                    ))}
-                </div>
-                <button type="button" onClick={addAccessory}>Add Accessory</button><br/><br/>
+                <input type="text" id="accessories_received" name="accessories_received" value={formData.accessories_received} onChange={handleInputChange}/><br/>
 
                 <label htmlFor="customer_email">Customer Email:</label>
-                <input type="email" id="customer_email" name="customer_email"/><br/><br/>
+                <input type="email" id="customer_email" name="customer_email" value={formData.customer_email} onChange={handleInputChange}/><br/><br/>
 
                 <input type="submit" value="Submit"/>
             </form>

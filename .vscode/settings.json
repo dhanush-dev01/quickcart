@@ -15,6 +15,21 @@
             "database": "quickcartDB",
             "username": "Akshay",
             "group": "quickcart1.database.windows.net"
+        },
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "quickcart1.database.windows.net",
+            "port": 1433,
+            "askForPassword": true,
+            "driver": "MSSQL",
+            "name": "dbo",
+            "database": "dbo",
+            "username": "Akahay"
         }
     ]
 }

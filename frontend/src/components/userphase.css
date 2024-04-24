@@ -59,21 +59,3 @@ h2 {
     /* Styles for completed phases */
     background-color: green; /* Change to your desired color */
   }
-
-  .submit-button{
-    border: 1px solid black;
-    border-radius: 50px;
-    background-color: #2196F3;
-    color: white;
-    padding: 5px 10px 5px 10px;
-    position: fixed;
-    left: 90%;
-    top: 80%;
-    transition: 0.5s;
-
-  }
-  .submit-button:hover{
-    background-color: #00008b;
-    color: bisque;
-    transition: 0.5s;
-  }

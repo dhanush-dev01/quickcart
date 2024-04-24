@@ -1,0 +1,20 @@
+h1{
+    text-align: center;
+    margin-top: 5%;
+    border-bottom: 1px solid brown;
+    padding-bottom: 15px;
+}
+
+.btc{
+    border-radius: 50px;
+    border: 1px solid brown;
+    position: fixed;
+    left: 2%;
+    background-color: rgb(235, 222, 222);
+    transition: 0.5s;
+}
+.btc:hover{
+    background-color: black;
+    color: aliceblue;
+    transition: 0.5s;
+}
