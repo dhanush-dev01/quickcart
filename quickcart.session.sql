@@ -3,13 +3,41 @@
 -- WHERE TABLE_TYPE='BASE TABLE'
 
 
---    SELECT pi.product_id
+
+--   SELECT pi.product_id
 -- FROM products_info pi
 -- LEFT JOIN customer_products cp ON pi.product_id = cp.product_id
 -- WHERE cp.customer_id = 'cus09';
 
-SELECT * FROM tracking
--- SELECT * FROM products_info
+-- SELECT COLUMN_NAME, DATA_TYPE
+-- FROM INFORMATION_SCHEMA.COLUMNS
+-- WHERE TABLE_NAME = 'organization_details';
+-- ALTER TABLE organization_details
+-- ALTER COLUMN customer_id VARCHAR(25);
+-- select * from requests
+-- ALTER TABLE requests
+-- ADD customer_id VARCHAR(255);
+
+
+-- CREATE TABLE requests (
+--   customerName VARCHAR(255) NOT NULL,
+--   productName VARCHAR(255) NOT NULL,
+--   modelName VARCHAR(255) NOT NULL,
+--   state int not null
+-- );
+
+
+-- SELECT * from organization_details
+-- SHOW COLUMNS FROM organization_details;
+-- DESCRIBE organization_details;
+-- SELECT COLUMN_NAME
+-- FROM INFORMATION_SCHEMA.COLUMNS
+-- WHERE TABLE_NAME = 'organization_details';
+
+
+
+-- SELECT * FROM quotations
+-- delete from quotations
 -- SELECT product_id, product_name, product_image_path
 -- FROM products_info
 -- WHERE product_id NOT IN (

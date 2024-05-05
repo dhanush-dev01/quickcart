@@ -20,7 +20,6 @@ const Home = () => {
         console.error('Error fetching user products:', error);
       }
     };
-
     fetchUserProducts();
   }, []);
 
@@ -35,14 +34,21 @@ const Home = () => {
           <div className="card" key={index}>
             {/* <img src={`/Product_Images/${product.products_name}.jpg`} alt={product.products_name} /> */}
             <img src={product.product_image_path} alt={product.products_name} />
+            <span>{product.product_name}</span>
             <div className="details">
               <Link to={`/userphases/${currentUser}/${product.product_id}`}>
                 status
               </Link>
+
             </div>
+            
           </div>
         ))}
+        
       </div>
+      <Link to={`/request/${currentUser}`}>
+                request
+              </Link>
       <div className="footer"></div>
     </div>
   );

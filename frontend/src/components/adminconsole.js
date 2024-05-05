@@ -108,11 +108,14 @@ const Adminconsole = () => {
                 onChange={handleInputChange}
                 placeholder="Customer Name"
               />
+              
               <button className='adbtn' onClick={handleCreateUser}>Create</button>
             </div>
           </div>
+          
         </div>
       )}
+      <a className='request' href='/requests'>requests</a>
     </div>
   );
 }

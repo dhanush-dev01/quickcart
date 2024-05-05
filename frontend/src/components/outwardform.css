@@ -53,7 +53,7 @@ select {
 }
 
 /* Custom select style */
-.custom-select {
+/* .custom-select {
     position: relative;
     display: inline-block;
     width: 100%;
@@ -68,7 +68,7 @@ select {
     background-color: #fff;
     appearance: none;
     cursor: pointer;
-}
+} */
 
 /* Style the arrow inside the select */
 .select-arrow {

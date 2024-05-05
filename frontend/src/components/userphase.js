@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams , Link} from "react-router-dom";
 import axios from "axios";
 import './userphase.css';
 
@@ -50,14 +50,14 @@ function Userphases() {
                 <div className="phases">
                     <div className={`phase ${phases.reception === 1 ? 'completed' : ''}`}>
                         <h3>Reception</h3>
-                        <p><a href="/inward" target="_blank">Fill Inward Form</a></p>
+                        <p><Link to={`/inwardfromcus/${customerId}/${productId}`}>View Inward form</Link></p>
                     </div>
                     <div className={`phase ${phases.evaluation === 1 ? 'completed' : ''}`}>
                         <h3>Evaluation</h3>
                     </div>
                     <div className={`phase ${phases.quotation === 1 ? 'completed' : ''}`}>
                         <h3>Quotation</h3>
-                        <p><a href="quotationform" target="_blank">Fill Quotation Form</a></p>
+                        <p><Link to={`/qutcus/${customerId}/${productId}`}>View Quotation</Link></p>
                     </div>
                     <div className={`phase ${phases.awaiting_work_order === 1 ? 'completed' : ''}`}>
                         <h3>Awaiting for the Work Order</h3>
@@ -75,7 +75,7 @@ function Userphases() {
                     </div>
                     <div className={`phase ${phases.dispatched === 1 ? 'completed' : ''}`}>
                         <h3>Dispatched</h3>
-                        <p><a href="/outwardform" target="_blank">Fill Outward Form</a></p>
+                        <p><Link to={`/outwardformcus/${customerId}/${productId}`}>View Quotation</Link></p>
                     </div>
                 </div>
                 <div className={`phase ${phases.delivery === 1 ? 'completed' : ''}`}>

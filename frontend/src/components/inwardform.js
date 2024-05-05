@@ -26,24 +26,13 @@ const InwardForm = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5002/api/form/getinwardForm/${customerId}/${productId}`);
+            const response = await axios.get(`http://localhost:5001/api/form/getinwardForm/${customerId}/${productId}`);
             const data = response.data;
-            console.log("data",response)
+            console.log("data",data)
+            console.log("data",data[0].accessories_received)
             // Set default values in the form state
-            setFormData({
-                customername: data.customername,
-                address: data.address,
-                contactnumber: data.contactnumber,
-                equipmentname: data.equipmentname,
-                modelnumber: data.modelnumber,
-                serialnumber: data.serialnumber,
-                kitsreceived: data.kitsreceived,
-                accessories_received: data.accessories_received,
-                customer_email: data.customer_email
-            });
-
+            setFormData(data[0]);
             // Set equipment name to trigger model number population
-            setEquipmentName(data.equipmentname || '');
         } catch (error) {
             console.error('Error fetching form data:', error);
         }
@@ -111,7 +100,7 @@ const InwardForm = () => {
         e.preventDefault();
         console.log('Form Data:', formData);
         try {
-            const response = await axios.post('http://localhost:5002/api/form/inwardForm', {
+            const response = await axios.post('http://localhost:5001/api/form/inwardForm', {
                 ...formData,
                 customer_id: customerId, // Include customer_id obtained from URL parameter
                 pro_id: productId // Include pro_id obtained from URL parameter
@@ -149,8 +138,8 @@ const InwardForm = () => {
 
                 <div className="custom-select">
                     <label htmlFor="equipmentname">Equipment Name:</label>
-                    <select id="equipmentname" name="equipmentname" onChange={handleInputChange}>
-                        <option value="">Select Equipment</option>
+                    <select id="equipmentname" name="equipmentname" value={formData.equipmentname} onChange={handleInputChange}>
+                        <option value=''>Select Equipment</option>
                         <option value="ET">DC EARTH RESISTANCE TESTER</option>
                         <option value="IT">INSULATION TESTER</option>
                         <option value="TFR">PREZIOHM TFR</option>
